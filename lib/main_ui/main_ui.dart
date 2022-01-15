@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:alpha/components/app_bar.dart';
 import 'package:alpha/main_ui/tabs/home_tab/home.dart';
@@ -5,6 +6,7 @@ import 'package:alpha/main_ui/tabs/pins_tab/pins.dart';
 import 'package:alpha/main_ui/tabs/profile_tab/profile.dart';
 import 'package:alpha/main_ui/tabs/search_tab/search.dart';
 import 'package:alpha/providers/main_provider.dart';
+import 'package:global_snack_bar/global_snack_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -128,14 +130,16 @@ class _MainUiState extends State<MainUi> {
             ),
           ),
         ),
-        body: IndexedStack(
-          index: context.watch<MainModel>().tabIndex,
-          children: [
-            homeTab,
-            searchTab,
-            pinsTab,
-            profileTab,
-          ],
+        body: GlobalMsgWrapper(
+          IndexedStack(
+            index: context.watch<MainModel>().tabIndex,
+            children: [
+              homeTab,
+              searchTab,
+              pinsTab,
+              profileTab,
+            ],
+          ),
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: <BottomNavigationBarItem>[

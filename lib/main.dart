@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:global_snack_bar/global_snack_bar.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:alpha/services/auth_serivce.dart';
 import 'package:alpha/routes/route_generator.dart';
@@ -14,7 +18,6 @@ import 'package:alpha/providers/main_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,6 +54,39 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+  @override
+  void initState() {
+    checkConnectivity();
+    super.initState();
+  }
+
+  void checkConnectivity() {
+    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      // Got a new connectivity status!
+      switch (result) {
+        case ConnectivityResult.none: {
+          GlobalSnackBarBloc.showMessage(
+            GlobalMsg("Internet connection lost", bgColor: Colors.red),
+          );
+        }
+        break;
+        case ConnectivityResult.mobile: {
+          GlobalSnackBarBloc.showMessage(
+            GlobalMsg("Mobile data connection restored", bgColor: Colors.green,),
+          );
+        }
+        break;
+        case ConnectivityResult.wifi: {
+          GlobalSnackBarBloc.showMessage(
+            GlobalMsg("Wi-fi connection restored", bgColor: Colors.green),
+          );
+
+        }
+        break;
+      }
+    });
+  }
 
   final themeLight = ThemeData.light().copyWith(
     appBarTheme: const AppBarTheme(

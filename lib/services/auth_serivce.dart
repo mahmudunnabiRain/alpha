@@ -1,6 +1,7 @@
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:global_snack_bar/global_snack_bar.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/src/provider.dart';
 
@@ -27,21 +28,27 @@ class AuthService {
 
   }
 
-  Future<UserCredential> signInWithGoogle() async {
+  Future<UserCredential?> signInWithGoogle() async {
     // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
 
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
 
-    // Once signed in, return the UserCredential
-    return await _fireBaseAuth.signInWithCredential(credential);
+      // Once signed in, return the UserCredential
+      return await _fireBaseAuth.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      GlobalSnackBarBloc.showMessage(
+        GlobalMsg(e.message.toString(), bgColor: Colors.red)
+      );
+    }
   }
 
 
@@ -100,8 +107,6 @@ class SignInWithGoogleButton extends StatefulWidget {
 
 class _SignInWithGoogleButtonState extends State<SignInWithGoogleButton> {
 
-
-
   @override
   void initState() {
     super.initState();
@@ -116,7 +121,6 @@ class _SignInWithGoogleButtonState extends State<SignInWithGoogleButton> {
         //   return const CircularProgressIndicator();
         // }
         if(snapshot.connectionState == ConnectionState.waiting) {
-          print('wait-----$snapshot.connectionState');
           return const CircularProgressIndicator();
         } else {
           return ElevatedButton.icon(
