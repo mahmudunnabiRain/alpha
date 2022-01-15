@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MainModel with ChangeNotifier {
 
   // App parameters
-  final String _appName = 'Basar Dalal';
+  final String _appName = 'Alpha';
   String get appName => _appName;
   final MaterialColor _appColor = Colors.pink;
   MaterialColor get appColor => _appColor;

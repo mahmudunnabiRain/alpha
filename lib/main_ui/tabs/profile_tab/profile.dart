@@ -72,7 +72,7 @@ class _UserProfileState extends State<UserProfile> {
           backgroundColor: context.watch<MainModel>().appColor,
           child: CircleAvatar(
             radius: 40,
-            backgroundColor: Colors.pink,
+            backgroundColor: context.watch<MainModel>().appColor,
             backgroundImage: NetworkImage(widget.user.photoURL),
           ),
         ),
