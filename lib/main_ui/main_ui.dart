@@ -19,6 +19,12 @@ class MainUi extends StatefulWidget {
 
 class _MainUiState extends State<MainUi> {
 
+  // bottomNavigation
+  late HomeTab homeTab;
+  late SearchTab searchTab;
+  late PinsTab pinsTab;
+  late ProfileTab profileTab;
+
   @override
   @protected
   @mustCallSuper
@@ -29,12 +35,6 @@ class _MainUiState extends State<MainUi> {
     pinsTab = const PinsTab();
     profileTab = const ProfileTab();
   }
-
-  // bottomNavigation
-  late HomeTab homeTab;
-  late SearchTab searchTab;
-  late PinsTab pinsTab;
-  late ProfileTab profileTab;
 
   void _onItemTapped(int index) {
     context.read<MainModel>().changeTabIndex(index);

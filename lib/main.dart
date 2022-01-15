@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:global_snack_bar/global_snack_bar.dart';
@@ -53,37 +54,55 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver{
 
   @override
   void initState() {
     checkConnectivity();
     super.initState();
+    WidgetsBinding.instance!.addObserver(this);
+    _appLifeCycleState = AppLifecycleState.resumed;
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
+  }
+
+  late AppLifecycleState _appLifeCycleState;
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    setState(() { _appLifeCycleState = state; });
+    print('---------state: $state');
   }
 
   void checkConnectivity() {
     Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       // Got a new connectivity status!
-      switch (result) {
-        case ConnectivityResult.none: {
-          GlobalSnackBarBloc.showMessage(
-            GlobalMsg("Internet connection lost", bgColor: Colors.red),
-          );
-        }
-        break;
-        case ConnectivityResult.mobile: {
-          GlobalSnackBarBloc.showMessage(
-            GlobalMsg("Mobile data connection restored", bgColor: Colors.green,),
-          );
-        }
-        break;
-        case ConnectivityResult.wifi: {
-          GlobalSnackBarBloc.showMessage(
-            GlobalMsg("Wi-fi connection restored", bgColor: Colors.green),
-          );
+      if(_appLifeCycleState == AppLifecycleState.resumed) {
+        switch (result) {
+          case ConnectivityResult.none: {
+            GlobalSnackBarBloc.showMessage(
+              GlobalMsg("Internet connection lost", bgColor: Colors.red),
+            );
+          }
+          break;
+          case ConnectivityResult.mobile: {
+            GlobalSnackBarBloc.showMessage(
+              GlobalMsg("Mobile data connection restored", bgColor: Colors.green,),
+            );
+          }
+          break;
+          case ConnectivityResult.wifi: {
+            GlobalSnackBarBloc.showMessage(
+              GlobalMsg("Wi-fi connection restored", bgColor: Colors.green),
+            );
 
+          }
+          break;
         }
-        break;
       }
     });
   }
