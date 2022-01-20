@@ -1,5 +1,6 @@
 {
-  "Basar Dalal": "Basar Dalal",
+  "Alpha": "Alpha",
+  "Create Ad": "Create Ad",
   "Home": "Home",
   "Increase": "Increase",
   "Decrease": "Decrease",
@@ -12,5 +13,12 @@
   "Language" : "Language",
   "Theme": "Theme",
   "All of your books is one App": "All of your solutions in one App",
-  "slogan": "Search For Your Home"
+  "Sign in with Google": "Sign in with Google",
+  "Sign out": "Sign out",
+  "slogan": "Search For Your Home",
+  "You must select an option": "Please select an option",
+  "This field cannot be empty": "This field cannot be empty",
+  "Insert your ad information": "Insert your ad information",
+  "Please provide at least one image": "Please provide at least one image",
+  "My Ads": "My Ads"
 }

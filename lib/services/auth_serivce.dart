@@ -1,3 +1,4 @@
+import 'package:alpha/providers/main_provider.dart';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -114,28 +115,20 @@ class _SignInWithGoogleButtonState extends State<SignInWithGoogleButton> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: context.read<AuthService>().getInstance().authStateChanges(),
-      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-        // if(snapshot.connectionState == ConnectionState.none) {
-        //   return const CircularProgressIndicator();
-        // }
-        if(snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
-        } else {
-          return ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(
-              primary: Colors.white,
-              onPrimary: Colors.black,
-              //minimumSize: const Size(double.infinity, 50)
-            ),
-            icon: Image.asset("assets/images/google_logo.png", width: 26, height: 26,),
-            label: const Text('Sign in with Google', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)).tr(),
-            onPressed: () {
-              context.read<AuthService>().signInWithGoogle();
-            },
-          );
-        }
+    return ElevatedButton.icon(
+      style: ElevatedButton.styleFrom(
+          primary: Colors.white,
+          onPrimary: Colors.black,
+          //minimumSize: const Size(double.infinity, 50)
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(2),
+              side: BorderSide(color: context.read<MainModel>().appColor)
+          )
+      ),
+      icon: Image.asset("assets/images/google_logo.png", width: 26, height: 26,),
+      label: const Text('Sign in with Google', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)).tr(),
+      onPressed: () {
+        context.read<AuthService>().signInWithGoogle();
       },
     );
   }
@@ -152,7 +145,18 @@ class _SignOutButtonState extends State<SignOutButton> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      child: const Text('Sign Out', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)).tr(),
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(2),
+            )
+        ),
+      ),
+      child: Text(
+          'Sign out'.tr(),
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white)
+      ),
       onPressed: () {
         context.read<AuthService>().signOut();
       },

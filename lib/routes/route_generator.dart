@@ -3,6 +3,7 @@ import 'package:alpha/main_ui/main_ui.dart';
 import 'package:alpha/pages/ad.dart';
 import 'package:alpha/pages/settings.dart';
 import 'package:alpha/test.dart';
+import 'package:page_transition/page_transition.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {

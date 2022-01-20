@@ -75,7 +75,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver{
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     setState(() { _appLifeCycleState = state; });
-    print('---------state: $state');
   }
 
   void checkConnectivity() {
@@ -148,6 +147,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver{
         )
     ),
     scaffoldBackgroundColor: Colors.black,
+    canvasColor: HexColor('#0f0f0f'),
+    cardColor: HexColor('#0f0f0f'),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       elevation: 1,
       showSelectedLabels: true,
@@ -172,7 +173,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver{
       secondary: Colors.pink,
       onSecondary: Colors.white,
     ),
-    canvasColor: HexColor('#0f0f0f'),
   );
 
   @override
@@ -180,6 +180,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver{
     return MaterialApp(
       title: context.watch<MainModel>().appName,
       // localization support
+      //localizationsDelegates: context.localizationDelegates,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,

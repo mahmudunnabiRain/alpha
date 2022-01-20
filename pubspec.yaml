@@ -44,6 +44,9 @@ dependencies:
   firebase_storage: ^10.2.5
   connectivity: ^3.0.6
   global_snack_bar: ^0.0.12
+  flutter_form_builder: ^7.0.0
+  form_builder_image_picker: ^2.0.0
+  page_transition: ^2.0.4
 
 
 dev_dependencies:
@@ -107,7 +110,7 @@ flutter:
 
 
 flutter_native_splash:
-  color: "#000000"
+  color: "#FFFFFF"
   image: assets/images/logo_title.png
   color_dark: "#000000"
   image_dark: assets/images/logo_title.png

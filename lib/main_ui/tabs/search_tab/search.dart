@@ -20,7 +20,6 @@ class _SearchTabState extends State<SearchTab> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Add your onPressed code here!
-          //Navigator.of(context).pushNamed('/createAd');
           //context.read<AdService>().createAd("Best House 2", "Dhanmondi", "Dhaka", "house no: 101", "Family", 12000);
         },
         child: const Icon(Icons.search),

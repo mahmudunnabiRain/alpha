@@ -1,5 +1,6 @@
 {
-  "Basar Dalal": "বাসার দালাল",
+  "Alpha": "আলফা",
+  "Create Ad": "বিজ্ঞাপন তৈরী করুন",
   "Home": "হোম",
   "Increase": "বৃদ্ধি",
   "Decrease": "হ্রাস",
@@ -12,5 +13,14 @@
   "Language" : "ভাষা",
   "Theme": "থিম",
   "All of your books is one App": "আপনার সমস্ত বই এক অ্যাপে",
-  "slogan": "আপনার বাড়ির জন্য অনুসন্ধান করুন"
+  "Sign in with Google": "গুগল এর সাথে সাইন ইন করুন",
+  "Sign out": "সাইন আউট",
+  "slogan": "আপনার বাড়ির জন্য অনুসন্ধান করুন",
+  "You must select an option": "একটি অপশন নির্বাচন করতেই হবে",
+  "This field cannot be empty": "এই ঘর টি খালি রাখা যাবে না",
+  "Insert your ad information": "আপনার বিজ্ঞাপনের তথ্য দিন",
+  "Please provide at least one image": "অন্তত একটি ছবি প্রদান করুন",
+  "Submit": "জমা দিন",
+  "Reset": "সব মুছুন",
+  "My Ads": "আমার বিজ্ঞাপনসমূহ"
 }
